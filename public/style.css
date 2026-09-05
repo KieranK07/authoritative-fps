@@ -1,0 +1,400 @@
+:root {
+  color-scheme: dark;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 20% 15%, #23334d 0%, #101820 40%, #070c12 100%);
+  color: #f4f8ff;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0) 42%, rgba(0, 0, 0, 0.33) 100%),
+    linear-gradient(180deg, rgba(137, 209, 255, 0.14) 0%, rgba(255, 205, 137, 0.08) 100%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 3px
+    );
+  mix-blend-mode: soft-light;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 11;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 0.8px, transparent 0.8px);
+  background-size: 3px 3px;
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+}
+
+canvas {
+  display: block;
+}
+
+#loginOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  background: radial-gradient(circle at 50% 40%, rgba(10, 20, 30, 0.38), rgba(2, 6, 10, 0.85));
+}
+
+#loginOverlay.hidden {
+  display: none;
+}
+
+.loginCard {
+  width: min(460px, calc(100vw - 32px));
+  padding: 18px;
+}
+
+.loginCard h2 {
+  margin: 0 0 8px;
+}
+
+.loginSub {
+  margin: 0 0 10px;
+  color: #b5c7dd;
+}
+
+#nameInput {
+  width: 100%;
+  border: 1px solid rgba(131, 160, 192, 0.45);
+  border-radius: 8px;
+  background: rgba(3, 9, 17, 0.9);
+  color: #e8f1ff;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.loginActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.loginActions button {
+  border: 1px solid rgba(131, 160, 192, 0.5);
+  background: rgba(11, 25, 39, 0.95);
+  color: #eff6ff;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.loginActions button:hover {
+  filter: brightness(1.08);
+}
+
+.loginHint {
+  margin: 10px 0 0;
+  min-height: 1.3em;
+  color: #ffd88b;
+  font-size: 12px;
+}
+
+#hud {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 20;
+}
+
+.card {
+  background: rgba(9, 18, 29, 0.7);
+  border: 1px solid rgba(131, 160, 192, 0.35);
+  border-radius: 10px;
+  padding: 8px 12px;
+  backdrop-filter: blur(4px);
+  font-size: 13px;
+}
+
+#chatPanel {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  width: min(420px, calc(100vw - 24px));
+  z-index: 30;
+}
+
+#centerHud {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 40;
+  pointer-events: none;
+}
+
+#crosshair {
+  color: #f1f7ff;
+  font-size: 26px;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
+  opacity: 0.8;
+}
+
+#hitMarker {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 44px;
+  color: #fffbcc;
+  opacity: 0;
+  transition: opacity 120ms linear;
+}
+
+#killFeed {
+  position: fixed;
+  right: 12px;
+  top: 12px;
+  width: min(320px, calc(100vw - 24px));
+  z-index: 37;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.killItem {
+  font-size: 12px;
+}
+
+.killHead {
+  color: #ff8f8f;
+  font-weight: 700;
+}
+
+#scoreboard {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  width: min(360px, calc(100vw - 24px));
+  z-index: 36;
+}
+
+.scoreHeader {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.scoreRow {
+  display: grid;
+  grid-template-columns: 1fr 48px 48px;
+  gap: 8px;
+  font-size: 12px;
+  padding: 3px 0;
+}
+
+.scoreName.me {
+  color: #ffd88b;
+  font-weight: 700;
+}
+
+.hidden {
+  display: none;
+}
+
+#bottomHud {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  width: min(520px, calc(100vw - 36px));
+  z-index: 35;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 8px;
+}
+
+.barLabel,
+.barValue {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.barValue {
+  text-align: right;
+}
+
+.meter {
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(131, 160, 192, 0.45);
+  background: rgba(3, 9, 17, 0.85);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  width: 100%;
+  transition: width 120ms linear;
+}
+
+.fill.health {
+  background: linear-gradient(90deg, #e94848, #ff8766);
+}
+
+.fill.stamina {
+  background: linear-gradient(90deg, #34c47c, #9af76f);
+}
+
+#chatMessages {
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding-right: 4px;
+}
+
+.chatLine {
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.chatName {
+  color: #8ad9ff;
+  font-weight: 700;
+}
+
+.chatSystem {
+  color: #ffe48e;
+}
+
+#chatForm {
+  display: block;
+}
+
+#chatInput {
+  width: 100%;
+  border: 1px solid rgba(131, 160, 192, 0.45);
+  border-radius: 8px;
+  background: rgba(3, 9, 17, 0.85);
+  color: #e8f1ff;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+#chatInput:focus {
+  outline: 2px solid rgba(118, 197, 255, 0.6);
+  border-color: rgba(118, 197, 255, 0.8);
+}
+
+#deathScreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+
+#deathScreen.hidden {
+  display: none;
+}
+
+.deathCard {
+  max-width: 400px;
+  padding: 32px;
+  text-align: center;
+  background: rgba(10, 20, 40, 0.95);
+  border: 2px solid rgba(200, 50, 50, 0.6);
+}
+
+.deathHeader {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ff6666;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.respawnTimer {
+  font-size: 18px;
+  color: #aaa;
+  margin-bottom: 24px;
+}
+
+#respawnCountdown {
+  color: #ffaa00;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.weaponSelectSection {
+  margin-top: 24px;
+}
+
+.weaponSelectLabel {
+  font-size: 14px;
+  color: #88ccff;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.weaponButtons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.weaponButton {
+  padding: 10px 8px;
+  background: rgba(40, 80, 140, 0.6);
+  border: 2px solid rgba(100, 150, 220, 0.5);
+  border-radius: 6px;
+  color: #cce5ff;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.weaponButton:hover {
+  background: rgba(60, 110, 180, 0.8);
+  border-color: rgba(150, 200, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+.weaponButton.selected {
+  background: rgba(100, 200, 100, 0.7);
+  border-color: rgba(150, 255, 150, 0.8);
+  box-shadow: 0 0 12px rgba(100, 200, 100, 0.5);
+}

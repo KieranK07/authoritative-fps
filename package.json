@@ -1,0 +1,15 @@
+{
+  "name": "3dgame-multiplayer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Authoritative 60Hz Three.js + Socket.io multiplayer capsule prototype",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1",
+    "three": "^0.183.2"
+  }
+}

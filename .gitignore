@@ -1,0 +1,15 @@
+# Dependencies (restore with `npm install` from package-lock.json)
+node_modules/
+
+# macOS
+.DS_Store
+
+# Logs / debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Env
+.env
+.env.local

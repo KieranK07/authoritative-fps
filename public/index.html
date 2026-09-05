@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Capsule Multiplayer</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="loginOverlay">
+      <div class="card loginCard">
+        <h2>Enter Arena</h2>
+        <p class="loginSub">Use a guest name or sign in with Google.</p>
+        <input id="nameInput" maxlength="16" placeholder="Display name" />
+        <div class="loginActions">
+          <button id="guestBtn" type="button">Play as Guest</button>
+          <button id="googleBtn" type="button">Sign in with Google</button>
+        </div>
+        <p id="loginHint" class="loginHint"></p>
+      </div>
+    </div>
+
+    <div id="hud">
+      <div class="card" id="status">Connecting...</div>
+      <div class="card" id="roundTimer">Round: 07:00</div>
+      <div class="card" id="weaponInfo">Rifle | 30 / 90</div>
+
+    </div>
+
+    <div id="centerHud">
+      <div id="crosshair">+</div>
+      <div id="hitMarker">x</div>
+    </div>
+
+    <div id="killFeed" class="card"></div>
+
+    <div id="deathScreen" class="hidden">
+      <div class="card deathCard">
+        <div class="deathHeader">You are dead</div>
+        <div class="respawnTimer">Respawning in: <span id="respawnCountdown">5</span>s</div>
+        <div class="weaponSelectSection">
+          <div class="weaponSelectLabel">Select Weapon:</div>
+          <div id="weaponButtons" class="weaponButtons"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="scoreboard" class="card hidden">
+      <div class="scoreHeader">Scoreboard</div>
+      <div id="scoreRows"></div>
+    </div>
+
+    <div id="bottomHud" class="card">
+      <div class="barRow">
+        <span class="barLabel">HP</span>
+        <div class="meter"><div id="healthFill" class="fill health"></div></div>
+        <span id="healthText" class="barValue">100</span>
+      </div>
+      <div class="barRow">
+        <span class="barLabel">STM</span>
+        <div class="meter"><div id="staminaFill" class="fill stamina"></div></div>
+        <span id="staminaText" class="barValue">100</span>
+      </div>
+    </div>
+
+    <div id="chatPanel" class="card">
+      <div id="chatMessages"></div>
+      <form id="chatForm" autocomplete="off">
+        <input id="chatInput" maxlength="140" placeholder="Press Enter to chat..." />
+      </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="./config.js"></script>
+    <script type="module" src="./client.js"></script>
+  </body>
+</html>
