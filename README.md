@@ -7,6 +7,8 @@ where players are, what they hit, and how much damage they take. The client
 sends input and draws what the server sends back. It does not decide anything
 that matters.
 
+![In-arena HUD showing HP, stamina, weapon ammo and level geometry](docs/img/gameplay.jpg)
+
 ## Why this way
 
 Most student FPS projects are client-authoritative: the browser tells the server
