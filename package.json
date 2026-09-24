@@ -5,7 +5,8 @@
   "description": "Authoritative 60Hz Three.js + Socket.io multiplayer capsule prototype",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "express": "^4.22.3",
