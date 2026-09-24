@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -86,8 +87,9 @@ const MAP_OBSTACLES = [
 ];
 
 const app = express();
-app.use(express.static('public'));
-app.use('/node_modules', express.static('node_modules'));
+app.use(express.static(path.join(__dirname, 'public')));
+// Expose only the Three.js browser build, not the rest of node_modules.
+app.use('/node_modules/three/build', express.static(path.join(__dirname, 'node_modules', 'three', 'build')));
 
 const server = http.createServer(app);
 const io = new Server(server, {

@@ -1,5 +1,4 @@
 import * as THREE from '/node_modules/three/build/three.module.js';
-import { CapsuleGeometry } from '/node_modules/three/src/geometries/CapsuleGeometry.js';
 
 console.log('Client script loading...');
 
@@ -241,7 +240,7 @@ function createPlayerVisual(colorHex) {
   bodyTexture.needsUpdate = true;
 
   const body = new THREE.Mesh(
-    new CapsuleGeometry(0.45, 1.1, 6, 12),
+    new THREE.CapsuleGeometry(0.45, 1.1, 6, 12),
     new THREE.MeshStandardMaterial({
       map: bodyTexture,
       color: new THREE.Color(colorHex),
