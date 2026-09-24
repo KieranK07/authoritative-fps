@@ -14,9 +14,9 @@ that matters.
 Most student FPS projects are client-authoritative: the browser tells the server
 "I moved here" and "I hit that guy", and the server believes it. That is easy to
 build and trivial to cheat -- a modified client can teleport or claim any hit.
-I wanted the harder, correct version, where the client is untrusted and the
-server owns the truth, so I could actually reason about hit registration and
-occlusion instead of taking the client's word for it.
+This project takes the other route: the client is untrusted and the server owns
+the truth, so hit registration and occlusion are decided in one place instead of
+on the client's word.
 
 ## The model
 
@@ -66,6 +66,7 @@ Node 18+.
 ```bash
 npm install
 npm start
+npm test    # ray-vs-sphere/AABB hit tests, occlusion, reload timer
 ```
 
 Open <http://localhost:3001>. Open it again in a second tab or on another machine
@@ -102,8 +103,9 @@ clock all work with several players. It is a prototype, and the honest gaps are:
 ## Layout
 
 ```
-server.js          authoritative 60Hz simulation: movement, collision, weapons,
-                   server-side hit registration + occlusion, snapshots
+server.js          authoritative 60Hz loop: movement, collision, sockets, snapshots
+game.js            weapons, map, ray tests, hit registration + occlusion, reload
+test/              node --test cases for game.js
 public/client.js   input capture, Three.js rendering, snapshot interpolation
 public/index.html  HUD, scoreboard, chat, login overlay
 public/style.css   HUD styling
