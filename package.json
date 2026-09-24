@@ -1,8 +1,8 @@
 {
-  "name": "3dgame-multiplayer",
+  "name": "authoritative-fps",
   "version": "1.0.0",
   "private": true,
-  "description": "Authoritative 60Hz Three.js + Socket.io multiplayer capsule prototype",
+  "description": "Browser multiplayer FPS with a 60 Hz authoritative Node server and server-side hit registration",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
